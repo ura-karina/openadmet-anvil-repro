@@ -1,0 +1,24 @@
+# Local tools and environments
+.tools/
+.venv/
+venv/
+.env
+
+# Python cache/build
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+
+# IDE/OS files
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Training/runtime artifacts
+catboost_info/
+lightning_logs/
