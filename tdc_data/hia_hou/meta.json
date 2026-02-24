@@ -1,0 +1,11 @@
+{
+  "dataset_name": "hia_hou",
+  "metric": null,
+  "n_test": 117,
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "task_type": "classification"
+}

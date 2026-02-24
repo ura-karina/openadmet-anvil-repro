@@ -1,0 +1,11 @@
+{
+  "dataset_name": "cyp2c9_substrate_carbonmangels",
+  "metric": null,
+  "n_test": 135,
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "task_type": "classification"
+}

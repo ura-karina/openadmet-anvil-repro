@@ -1,0 +1,39 @@
+{
+  "tag": "tdc__ames__seed1__RFClassifierModel__mordred__sk_basic",
+  "accuracy": {
+    "value": 0.789293067947838,
+    "lower_ci": 0.7680164722031573,
+    "upper_ci": 0.8105696636925189,
+    "confidence_level": 0.95
+  },
+  "precision": {
+    "value": 0.8307873090481787,
+    "lower_ci": 0.8059641507993671,
+    "upper_ci": 0.8563798129015521,
+    "confidence_level": 0.95
+  },
+  "recall": {
+    "value": 0.8126436781609195,
+    "lower_ci": 0.7873231001662422,
+    "upper_ci": 0.8389850049605009,
+    "confidence_level": 0.95
+  },
+  "f1": {
+    "value": 0.821615339918652,
+    "lower_ci": 0.8029222868264135,
+    "upper_ci": 0.8420403802753427,
+    "confidence_level": 0.95
+  },
+  "roc_auc": {
+    "value": 0.8404354892400479,
+    "lower_ci": 0.8198980833144358,
+    "upper_ci": 0.8611056000625152,
+    "confidence_level": 0.95
+  },
+  "pr_auc": {
+    "value": 0.8735050217566733,
+    "lower_ci": 0.8510109546518883,
+    "upper_ci": 0.8981054282004093,
+    "confidence_level": 0.95
+  }
+}

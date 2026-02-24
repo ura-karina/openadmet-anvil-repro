@@ -1,0 +1,39 @@
+{
+  "tag": "tdc__ames__seed1__CatBoostClassifierModel__fp_ecfp4__sk_basic",
+  "accuracy": {
+    "value": 0.7590940288263556,
+    "lower_ci": 0.7371310912834592,
+    "upper_ci": 0.7810569663692519,
+    "confidence_level": 0.95
+  },
+  "precision": {
+    "value": 0.7925591882750845,
+    "lower_ci": 0.7662286018095971,
+    "upper_ci": 0.8200177054092295,
+    "confidence_level": 0.95
+  },
+  "recall": {
+    "value": 0.8080459770114943,
+    "lower_ci": 0.7820109834695869,
+    "upper_ci": 0.834768211582346,
+    "confidence_level": 0.95
+  },
+  "f1": {
+    "value": 0.8002276607854297,
+    "lower_ci": 0.7800213454210811,
+    "upper_ci": 0.8209159774705301,
+    "confidence_level": 0.95
+  },
+  "roc_auc": {
+    "value": 0.8169770310756037,
+    "lower_ci": 0.7949916820650275,
+    "upper_ci": 0.8390020574832749,
+    "confidence_level": 0.95
+  },
+  "pr_auc": {
+    "value": 0.8632671681323225,
+    "lower_ci": 0.8411845773181924,
+    "upper_ci": 0.8862499314689162,
+    "confidence_level": 0.95
+  }
+}

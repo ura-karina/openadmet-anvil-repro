@@ -1,0 +1,54 @@
+data:
+  dropna: true
+  input_col: OPENADMET_SMILES
+  target_cols:
+  - y
+  test_resource: /home/urakarina/openadmet-anvil-repro/tdc_data/caco2_wang/test.parquet
+  train_resource: /home/urakarina/openadmet-anvil-repro/tdc_data/caco2_wang/seed_1/train.parquet
+  type: intake
+  val_resource: /home/urakarina/openadmet-anvil-repro/tdc_data/caco2_wang/seed_1/valid.parquet
+metadata:
+  authors: openadmet-anvil-repro
+  biotargets:
+  - caco2_wang
+  build_number: 0
+  description: TDC ADMET_Group caco2_wang seed 1
+  driver: sklearn
+  email: k@mail.ru
+  name: caco2_wang__TabPFNRegressorModel__mordred__tabpfn_basic
+  tag: tdc__caco2_wang__seed1__TabPFNRegressorModel__mordred__tabpfn_basic
+  tags:
+  - tdc
+  - admet_group
+  version: v1
+procedure:
+  feat:
+    params:
+      descr_type: mordred
+    type: DescriptorFeaturizer
+  model:
+    params: {}
+    type: TabPFNRegressorModel
+  split:
+    params:
+      random_state: 42
+      test_size: 0.0
+      train_size: 1.0
+      val_size: 0.0
+    type: ShuffleSplitter
+  train:
+    params: {}
+    type: SKLearnBasicTrainer
+  transform:
+    params:
+      strategy: mean
+    type: ImputeTransform
+report:
+  eval:
+  - params: {}
+    type: RegressionMetrics
+  - params:
+      n_repeats: 5
+      n_splits: 5
+      random_state: 42
+    type: SKLearnRepeatedKFoldCrossValidation

@@ -1,0 +1,11 @@
+{
+  "dataset_name": "cyp2d6_veith",
+  "metric": null,
+  "n_test": 2626,
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "task_type": "classification"
+}

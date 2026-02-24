@@ -1,0 +1,25 @@
+ensemble: null
+feat:
+  params:
+    descr_type: desc2d
+  type: DescriptorFeaturizer
+model:
+  freeze_weights: null
+  param_path: null
+  params: {}
+  serial_path: null
+  type: LGBMClassifierModel
+split:
+  params:
+    random_state: 42
+    test_size: 0.0
+    train_size: 1.0
+    val_size: 0.0
+  type: ShuffleSplitter
+train:
+  params: {}
+  type: SKLearnBasicTrainer
+transform:
+  params:
+    strategy: mean
+  type: ImputeTransform

@@ -1,0 +1,11 @@
+{
+  "dataset_name": "solubility_aqsoldb",
+  "metric": null,
+  "n_test": 1997,
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "task_type": "regression"
+}

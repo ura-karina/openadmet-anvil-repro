@@ -1,0 +1,50 @@
+data:
+  dropna: true
+  input_col: OPENADMET_SMILES
+  target_cols:
+  - y
+  test_resource: /home/urakarina/openadmet-anvil-repro/tdc_data/hia_hou/test.parquet
+  train_resource: /home/urakarina/openadmet-anvil-repro/tdc_data/hia_hou/seed_1/train.parquet
+  type: intake
+  val_resource: /home/urakarina/openadmet-anvil-repro/tdc_data/hia_hou/seed_1/valid.parquet
+metadata:
+  authors: openadmet-anvil-repro
+  biotargets:
+  - hia_hou
+  build_number: 0
+  description: TDC ADMET_Group hia_hou seed 1
+  driver: sklearn
+  email: k@mail.ru
+  name: hia_hou__DummyClassifierModel__fp_ecfp4__sk_basic
+  tag: tdc__hia_hou__seed1__DummyClassifierModel__fp_ecfp4__sk_basic
+  tags:
+  - tdc
+  - admet_group
+  version: v1
+procedure:
+  feat:
+    params:
+      fp_type: ecfp:4
+    type: FingerprintFeaturizer
+  model:
+    params: {}
+    type: DummyClassifierModel
+  split:
+    params:
+      random_state: 42
+      test_size: 0.0
+      train_size: 1.0
+      val_size: 0.0
+    type: ShuffleSplitter
+  train:
+    params: {}
+    type: SKLearnBasicTrainer
+report:
+  eval:
+  - params: {}
+    type: ClassificationMetrics
+  - params:
+      n_repeats: 5
+      n_splits: 5
+      random_state: 42
+    type: SKLearnRepeatedKFoldCrossValidation

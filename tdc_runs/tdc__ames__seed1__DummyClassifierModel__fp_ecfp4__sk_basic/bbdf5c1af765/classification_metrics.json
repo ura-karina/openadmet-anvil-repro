@@ -1,0 +1,39 @@
+{
+  "tag": "tdc__ames__seed1__DummyClassifierModel__fp_ecfp4__sk_basic",
+  "accuracy": {
+    "value": 0.5971173644474949,
+    "lower_ci": 0.5717227179135209,
+    "upper_ci": 0.6225120109814688,
+    "confidence_level": 0.95
+  },
+  "precision": {
+    "value": 0.5971173644474949,
+    "lower_ci": 0.5710363761153054,
+    "upper_ci": 0.6225120109814688,
+    "confidence_level": 0.95
+  },
+  "recall": {
+    "value": 1.0,
+    "lower_ci": 1.0,
+    "upper_ci": 1.0,
+    "confidence_level": 0.95
+  },
+  "f1": {
+    "value": 0.7477438762354963,
+    "lower_ci": 0.7286659158226643,
+    "upper_ci": 0.767421405897444,
+    "confidence_level": 0.95
+  },
+  "roc_auc": {
+    "value": 0.5,
+    "lower_ci": 0.5,
+    "upper_ci": 0.5,
+    "confidence_level": 0.95
+  },
+  "pr_auc": {
+    "value": 0.7985586822237474,
+    "lower_ci": 0.7862045298558682,
+    "upper_ci": 0.8112560054907343,
+    "confidence_level": 0.95
+  }
+}

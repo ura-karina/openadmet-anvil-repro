@@ -1,0 +1,11 @@
+{
+  "dataset_name": "ppbr_az",
+  "metric": null,
+  "n_test": 559,
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "task_type": "regression"
+}

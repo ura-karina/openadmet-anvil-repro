@@ -1,0 +1,55 @@
+data:
+  dropna: true
+  input_col: OPENADMET_SMILES
+  target_cols:
+  - y
+  test_resource: /home/urakarina/openadmet-anvil-repro/tdc_data/cyp3a4_substrate_carbonmangels/test.parquet
+  train_resource: /home/urakarina/openadmet-anvil-repro/tdc_data/cyp3a4_substrate_carbonmangels/seed_1/train.parquet
+  type: intake
+  val_resource: /home/urakarina/openadmet-anvil-repro/tdc_data/cyp3a4_substrate_carbonmangels/seed_1/valid.parquet
+metadata:
+  authors: openadmet-anvil-repro
+  biotargets:
+  - cyp3a4_substrate_carbonmangels
+  build_number: 0
+  description: TDC ADMET_Group cyp3a4_substrate_carbonmangels seed 1
+  driver: sklearn
+  email: k@mail.ru
+  name: cyp3a4_substrate_carbonmangels__SVMClassifierModel__mordred__sk_basic
+  tag: tdc__cyp3a4_substrate_carbonmangels__seed1__SVMClassifierModel__mordred__sk_basic
+  tags:
+  - tdc
+  - admet_group
+  version: v1
+procedure:
+  feat:
+    params:
+      descr_type: mordred
+    type: DescriptorFeaturizer
+  model:
+    params:
+      probability: true
+    type: SVMClassifierModel
+  split:
+    params:
+      random_state: 42
+      test_size: 0.0
+      train_size: 1.0
+      val_size: 0.0
+    type: ShuffleSplitter
+  train:
+    params: {}
+    type: SKLearnBasicTrainer
+  transform:
+    params:
+      strategy: mean
+    type: ImputeTransform
+report:
+  eval:
+  - params: {}
+    type: ClassificationMetrics
+  - params:
+      n_repeats: 5
+      n_splits: 5
+      random_state: 42
+    type: SKLearnRepeatedKFoldCrossValidation

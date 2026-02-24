@@ -1,0 +1,26 @@
+ensemble: null
+feat:
+  params: {}
+  type: ChemPropFeaturizer
+model:
+  freeze_weights: null
+  param_path: null
+  params: {}
+  serial_path: null
+  type: ChemPropModel
+split:
+  params:
+    random_state: 42
+    test_size: 0.0
+    train_size: 1.0
+    val_size: 0.0
+  type: ShuffleSplitter
+train:
+  params:
+    accelerator: gpu
+    batch_size: 50
+    devices: 1
+    lr: 0.0005
+    max_epochs: 30
+  type: LightningTrainer
+transform: null

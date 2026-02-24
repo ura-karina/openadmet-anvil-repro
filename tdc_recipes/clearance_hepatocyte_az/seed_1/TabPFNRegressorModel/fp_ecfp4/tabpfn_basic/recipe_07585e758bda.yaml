@@ -1,0 +1,50 @@
+data:
+  dropna: true
+  input_col: OPENADMET_SMILES
+  target_cols:
+  - y
+  test_resource: /home/urakarina/openadmet-anvil-repro/tdc_data/clearance_hepatocyte_az/test.parquet
+  train_resource: /home/urakarina/openadmet-anvil-repro/tdc_data/clearance_hepatocyte_az/seed_1/train.parquet
+  type: intake
+  val_resource: /home/urakarina/openadmet-anvil-repro/tdc_data/clearance_hepatocyte_az/seed_1/valid.parquet
+metadata:
+  authors: openadmet-anvil-repro
+  biotargets:
+  - clearance_hepatocyte_az
+  build_number: 0
+  description: TDC ADMET_Group clearance_hepatocyte_az seed 1
+  driver: sklearn
+  email: k@mail.ru
+  name: clearance_hepatocyte_az__TabPFNRegressorModel__fp_ecfp4__tabpfn_basic
+  tag: tdc__clearance_hepatocyte_az__seed1__TabPFNRegressorModel__fp_ecfp4__tabpfn_basic
+  tags:
+  - tdc
+  - admet_group
+  version: v1
+procedure:
+  feat:
+    params:
+      fp_type: ecfp:4
+    type: FingerprintFeaturizer
+  model:
+    params: {}
+    type: TabPFNRegressorModel
+  split:
+    params:
+      random_state: 42
+      test_size: 0.0
+      train_size: 1.0
+      val_size: 0.0
+    type: ShuffleSplitter
+  train:
+    params: {}
+    type: SKLearnBasicTrainer
+report:
+  eval:
+  - params: {}
+    type: RegressionMetrics
+  - params:
+      n_repeats: 5
+      n_splits: 5
+      random_state: 42
+    type: SKLearnRepeatedKFoldCrossValidation

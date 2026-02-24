@@ -1,0 +1,11 @@
+{
+  "dataset_name": "caco2_wang",
+  "metric": null,
+  "n_test": 182,
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "task_type": "regression"
+}

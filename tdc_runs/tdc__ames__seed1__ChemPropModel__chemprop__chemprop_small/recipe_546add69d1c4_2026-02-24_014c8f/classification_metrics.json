@@ -1,0 +1,39 @@
+{
+  "tag": "tdc__ames__seed1__ChemPropModel__chemprop__chemprop_small",
+  "accuracy": {
+    "value": 0.7721345229924502,
+    "lower_ci": 0.7508579272477693,
+    "upper_ci": 0.7934111187371311,
+    "confidence_level": 0.95
+  },
+  "precision": {
+    "value": 0.8142523364485982,
+    "lower_ci": 0.7884586429777487,
+    "upper_ci": 0.8397268173409671,
+    "confidence_level": 0.95
+  },
+  "recall": {
+    "value": 0.8011494252873563,
+    "lower_ci": 0.7749031932958635,
+    "upper_ci": 0.8280317110948072,
+    "confidence_level": 0.95
+  },
+  "f1": {
+    "value": 0.8076477404403245,
+    "lower_ci": 0.7883702431969845,
+    "upper_ci": 0.8287388771070641,
+    "confidence_level": 0.95
+  },
+  "roc_auc": {
+    "value": 0.8347010906812352,
+    "lower_ci": 0.8141708896000232,
+    "upper_ci": 0.8562333385977136,
+    "confidence_level": 0.95
+  },
+  "pr_auc": {
+    "value": 0.860994220023805,
+    "lower_ci": 0.8362869855765501,
+    "upper_ci": 0.8878020506111952,
+    "confidence_level": 0.95
+  }
+}

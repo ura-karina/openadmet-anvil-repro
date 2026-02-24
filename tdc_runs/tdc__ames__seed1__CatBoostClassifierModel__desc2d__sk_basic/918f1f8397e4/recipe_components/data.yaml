@@ -1,0 +1,11 @@
+anvil_dir: file:///home/urakarina/openadmet-anvil-repro/tdc_recipes/ames/seed_1/CatBoostClassifierModel/desc2d/sk_basic
+cat_entry: null
+dropna: true
+input_col: OPENADMET_SMILES
+resource: null
+target_cols:
+- y
+test_resource: /home/urakarina/openadmet-anvil-repro/tdc_data/ames/test.parquet
+train_resource: /home/urakarina/openadmet-anvil-repro/tdc_data/ames/seed_1/train.parquet
+type: intake
+val_resource: /home/urakarina/openadmet-anvil-repro/tdc_data/ames/seed_1/valid.parquet

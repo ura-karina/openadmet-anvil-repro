@@ -1,0 +1,13 @@
+authors: openadmet-anvil-repro
+biotargets:
+- ames
+build_number: 0
+description: TDC ADMET_Group ames seed 1
+driver: sklearn
+email: k@mail.ru
+name: ames__DummyClassifierModel__mordred__sk_basic
+tag: tdc__ames__seed1__DummyClassifierModel__mordred__sk_basic
+tags:
+- tdc
+- admet_group
+version: v1

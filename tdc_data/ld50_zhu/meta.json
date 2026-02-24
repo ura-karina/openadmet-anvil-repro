@@ -1,0 +1,11 @@
+{
+  "dataset_name": "ld50_zhu",
+  "metric": null,
+  "n_test": 1478,
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "task_type": "regression"
+}

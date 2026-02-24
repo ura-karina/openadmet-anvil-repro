@@ -1,0 +1,162 @@
+seeds: [1]
+
+datasets:
+  - name: caco2_wang
+    task_kind: regression
+  - name: bioavailability_ma
+    task_kind: classification
+  - name: lipophilicity_astrazeneca
+    task_kind: regression
+  - name: solubility_aqsoldb
+    task_kind: regression
+  - name: hia_hou
+    task_kind: classification
+  - name: pgp_broccatelli
+    task_kind: classification
+  - name: bbb_martins
+    task_kind: classification
+  - name: ppbr_az
+    task_kind: regression
+  - name: vdss_lombardo
+    task_kind: regression
+  - name: cyp2c9_veith
+    task_kind: classification
+  - name: cyp2d6_veith
+    task_kind: classification
+  - name: cyp3a4_veith
+    task_kind: classification
+  - name: cyp2c9_substrate_carbonmangels
+    task_kind: classification
+  - name: cyp2d6_substrate_carbonmangels
+    task_kind: classification
+  - name: cyp3a4_substrate_carbonmangels
+    task_kind: classification
+  - name: half_life_obach
+    task_kind: regression
+  - name: clearance_hepatocyte_az
+    task_kind: regression
+  - name: clearance_microsome_az
+    task_kind: regression
+  - name: ld50_zhu
+    task_kind: regression
+  - name: herg
+    task_kind: classification
+  - name: ames
+    task_kind: classification
+  - name: dili
+    task_kind: classification
+
+featurizers:
+  fp_ecfp4:
+    type: FingerprintFeaturizer
+    params:
+      fp_type: "ecfp:4"
+  mordred:
+    type: DescriptorFeaturizer
+    params:
+      descr_type: "mordred"
+  desc2d:
+    type: DescriptorFeaturizer
+    params:
+      descr_type: "desc2d"
+  chemprop:
+    type: ChemPropFeaturizer
+    params: {}
+
+trainers:
+  sk_basic:
+    type: SKLearnBasicTrainer
+    params: {}
+  tabpfn_basic:
+    type: SKLearnBasicTrainer
+    params: {}
+  chemprop_small:
+    type: LightningTrainer
+    params:
+      max_epochs: 30
+      batch_size: 50
+      lr: 0.0005
+
+models:
+  - name: LGBMRegressorModel
+    task_kind: regression
+    featurizers: [fp_ecfp4, mordred, desc2d]
+    trainers: [sk_basic]
+  - name: LGBMClassifierModel
+    task_kind: classification
+    featurizers: [fp_ecfp4, mordred, desc2d]
+    trainers: [sk_basic]
+
+  - name: CatBoostRegressorModel
+    task_kind: regression
+    featurizers: [fp_ecfp4, mordred, desc2d]
+    trainers: [sk_basic]
+  - name: CatBoostClassifierModel
+    task_kind: classification
+    featurizers: [fp_ecfp4, mordred, desc2d]
+    trainers: [sk_basic]
+
+  - name: XGBRegressorModel
+    task_kind: regression
+    featurizers: [fp_ecfp4, mordred, desc2d]
+    trainers: [sk_basic]
+  - name: XGBClassifierModel
+    task_kind: classification
+    featurizers: [fp_ecfp4, mordred, desc2d]
+    trainers: [sk_basic]
+
+  - name: RFRegressorModel
+    task_kind: regression
+    featurizers: [fp_ecfp4, mordred, desc2d]
+    trainers: [sk_basic]
+  - name: RFClassifierModel
+    task_kind: classification
+    featurizers: [fp_ecfp4, mordred, desc2d]
+    trainers: [sk_basic]
+
+  - name: SVMRegressorModel
+    task_kind: regression
+    featurizers: [fp_ecfp4, mordred, desc2d]
+    trainers: [sk_basic]
+  - name: SVMClassifierModel
+    task_kind: classification
+    featurizers: [fp_ecfp4, mordred, desc2d]
+    trainers: [sk_basic]
+    model_params:
+      probability: true
+
+  - name: TabPFNRegressorModel
+    task_kind: regression
+    featurizers: [fp_ecfp4, mordred, desc2d]
+    trainers: [tabpfn_basic]
+  - name: TabPFNClassifierModel
+    task_kind: classification
+    featurizers: [fp_ecfp4, mordred, desc2d]
+    trainers: [tabpfn_basic]
+
+  - name: TabPFNPostHocRegressorModel
+    task_kind: regression
+    featurizers: [fp_ecfp4, mordred, desc2d]
+    trainers: [tabpfn_basic]
+  - name: TabPFNPostHocClassifierModel
+    task_kind: classification
+    featurizers: [fp_ecfp4, mordred, desc2d]
+    trainers: [tabpfn_basic]
+
+  - name: DummyRegressorModel
+    task_kind: regression
+    featurizers: [fp_ecfp4, mordred, desc2d]
+    trainers: [sk_basic]
+  - name: DummyClassifierModel
+    task_kind: classification
+    featurizers: [fp_ecfp4, mordred, desc2d]
+    trainers: [sk_basic]
+
+  - name: ChemPropModel
+    task_kind: regression
+    featurizers: [chemprop]
+    trainers: [chemprop_small]
+  - name: ChemPropModel
+    task_kind: classification
+    featurizers: [chemprop]
+    trainers: [chemprop_small]

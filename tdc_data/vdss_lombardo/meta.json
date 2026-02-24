@@ -1,0 +1,11 @@
+{
+  "dataset_name": "vdss_lombardo",
+  "metric": null,
+  "n_test": 226,
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "task_type": "regression"
+}

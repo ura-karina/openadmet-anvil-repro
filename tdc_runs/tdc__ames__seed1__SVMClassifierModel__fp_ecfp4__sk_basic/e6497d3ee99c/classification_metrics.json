@@ -1,0 +1,39 @@
+{
+  "tag": "tdc__ames__seed1__SVMClassifierModel__fp_ecfp4__sk_basic",
+  "accuracy": {
+    "value": 0.7577213452299245,
+    "lower_ci": 0.7357584076870282,
+    "upper_ci": 0.7796842827728209,
+    "confidence_level": 0.95
+  },
+  "precision": {
+    "value": 0.7974683544303798,
+    "lower_ci": 0.7718153215775225,
+    "upper_ci": 0.8240789598799754,
+    "confidence_level": 0.95
+  },
+  "recall": {
+    "value": 0.7965517241379311,
+    "lower_ci": 0.7701611499372809,
+    "upper_ci": 0.8233364059998292,
+    "confidence_level": 0.95
+  },
+  "f1": {
+    "value": 0.79700977573318,
+    "lower_ci": 0.7768269581891009,
+    "upper_ci": 0.817658021918272,
+    "confidence_level": 0.95
+  },
+  "roc_auc": {
+    "value": 0.8230668311500128,
+    "lower_ci": 0.8019016907898657,
+    "upper_ci": 0.8448128623375445,
+    "confidence_level": 0.95
+  },
+  "pr_auc": {
+    "value": 0.8695716431619394,
+    "lower_ci": 0.8486958372954899,
+    "upper_ci": 0.8927994204922672,
+    "confidence_level": 0.95
+  }
+}

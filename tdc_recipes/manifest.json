@@ -1,0 +1,9 @@
+{
+  "data_root": "/home/urakarina/openadmet-anvil-repro/tdc_data",
+  "matrix_path": "tdc_recipes/matrix.yaml",
+  "n_recipes": 550,
+  "out_root": "/home/urakarina/openadmet-anvil-repro/tdc_recipes",
+  "seeds": [
+    1
+  ]
+}

@@ -1,0 +1,8 @@
+eval:
+- params: {}
+  type: ClassificationMetrics
+- params:
+    n_repeats: 5
+    n_splits: 5
+    random_state: 42
+  type: PytorchLightningRepeatedKFoldCrossValidation

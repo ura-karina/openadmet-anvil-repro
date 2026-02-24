@@ -1,0 +1,11 @@
+{
+  "dataset_name": "pgp_broccatelli",
+  "metric": null,
+  "n_test": 245,
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "task_type": "classification"
+}

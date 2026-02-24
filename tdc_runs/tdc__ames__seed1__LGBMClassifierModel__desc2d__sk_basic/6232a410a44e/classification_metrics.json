@@ -1,0 +1,39 @@
+{
+  "tag": "tdc__ames__seed1__LGBMClassifierModel__desc2d__sk_basic",
+  "accuracy": {
+    "value": 0.7762525737817433,
+    "lower_ci": 0.7549759780370624,
+    "upper_ci": 0.797529169526424,
+    "confidence_level": 0.95
+  },
+  "precision": {
+    "value": 0.8056179775280898,
+    "lower_ci": 0.7800516055005827,
+    "upper_ci": 0.8320459311146974,
+    "confidence_level": 0.95
+  },
+  "recall": {
+    "value": 0.8241379310344827,
+    "lower_ci": 0.7991767629698664,
+    "upper_ci": 0.8498708517231571,
+    "confidence_level": 0.95
+  },
+  "f1": {
+    "value": 0.8147727272727273,
+    "lower_ci": 0.7953623420428922,
+    "upper_ci": 0.8345284670029858,
+    "confidence_level": 0.95
+  },
+  "roc_auc": {
+    "value": 0.8383040592140046,
+    "lower_ci": 0.8175195338532033,
+    "upper_ci": 0.8594394925121872,
+    "confidence_level": 0.95
+  },
+  "pr_auc": {
+    "value": 0.867242015253941,
+    "lower_ci": 0.8424082849836729,
+    "upper_ci": 0.8925893096492048,
+    "confidence_level": 0.95
+  }
+}
