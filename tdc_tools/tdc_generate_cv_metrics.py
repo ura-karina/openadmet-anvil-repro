@@ -2,9 +2,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import pickle
 from pathlib import Path
 from typing import Any
 
+import joblib
 import numpy as np
 import yaml
 from sklearn.metrics import (
@@ -29,6 +31,16 @@ from openadmet.models.trainer.lightning import LightningTrainer
 
 SKLEARN_CV_TYPES = {"SKLearnRepeatedKFoldCrossValidation"}
 LIGHTNING_CV_TYPES = {"PytorchLightningRepeatedKFoldCrossValidation"}
+
+
+class _SklearnModelAdapter:
+    """Adapter exposing both .estimator and sklearn prediction methods."""
+
+    def __init__(self, estimator):
+        self.estimator = estimator
+
+    def __getattr__(self, name: str):
+        return getattr(self.estimator, name)
 
 
 def _ensure_2d(arr: Any) -> np.ndarray:
@@ -225,7 +237,22 @@ def _load_specs(run_dir: Path) -> tuple[ProcedureSpec, DataSpec]:
 
 
 def _run_sklearn_cv(run_dir: Path, recipe: dict[str, Any], params: dict[str, Any]) -> None:
-    loaded_model, feat, _, data_spec = load_anvil_model_and_metadata(run_dir)
+    try:
+        loaded_model, feat, _, data_spec = load_anvil_model_and_metadata(run_dir)
+    except Exception:
+        # Some legacy DummyClassifier runs have model params incompatible with
+        # current pydantic validation. Fall back to the serialized sklearn model.
+        model_type = str(recipe.get("procedure", {}).get("model", {}).get("type", ""))
+        model_pkl = run_dir / "model.pkl"
+        if "DummyClassifierModel" not in model_type or not model_pkl.exists():
+            raise
+        proc, data_spec = _load_specs(run_dir)
+        feat = proc.feat.to_class()
+        try:
+            loaded_model = _SklearnModelAdapter(joblib.load(model_pkl))
+        except Exception:
+            with model_pkl.open("rb") as f:
+                loaded_model = _SklearnModelAdapter(pickle.load(f))
 
     X_train, X_val, X_test, y_train, y_val, y_test, X_all, y_all = data_spec.read()
 
@@ -282,7 +309,13 @@ def _run_sklearn_cv(run_dir: Path, recipe: dict[str, Any], params: dict[str, Any
     evaluator.report(write=True, output_dir=run_dir)
 
 
-def _run_lightning_cv(run_dir: Path, recipe: dict[str, Any], params: dict[str, Any]) -> None:
+def _run_lightning_cv(
+    run_dir: Path,
+    recipe: dict[str, Any],
+    params: dict[str, Any],
+    lightning_accelerator: str,
+    lightning_devices: int,
+) -> None:
     proc, data_spec = _load_specs(run_dir)
     feat = proc.feat.to_class()
 
@@ -302,10 +335,14 @@ def _run_lightning_cv(run_dir: Path, recipe: dict[str, Any], params: dict[str, A
     trainer = proc.train.to_class() if proc.train else LightningTrainer()
     if trainer.output_dir is None:
         trainer.output_dir = run_dir
-    trainer.accelerator = "cpu"
-    trainer.devices = 1
+    trainer.accelerator = lightning_accelerator
+    trainer.devices = lightning_devices
 
-    y_pred = model.predict(test_dl, accelerator="cpu", devices=1)
+    y_pred = model.predict(
+        test_dl,
+        accelerator=lightning_accelerator,
+        devices=lightning_devices,
+    )
     y_pred = _ensure_2d(y_pred)
     y_true = _ensure_2d(y_test.to_numpy())
 
@@ -339,6 +376,9 @@ def generate_cv(
     overwrite: bool,
     exclude_models: set[str],
     task_type: str,
+    lightning_accelerator: str,
+    lightning_devices: int,
+    require_classification_metrics: bool,
 ) -> None:
     runs_root = runs_root.expanduser().resolve()
 
@@ -353,6 +393,10 @@ def generate_cv(
             continue
 
         for run_dir in sorted([p for p in tag_dir.iterdir() if p.is_dir()]):
+            if require_classification_metrics and not (
+                run_dir / "classification_metrics.json"
+            ).exists():
+                continue
             cv_path = run_dir / "cross_validation_metrics.json"
             if cv_path.exists() and not overwrite:
                 continue
@@ -369,7 +413,13 @@ def generate_cv(
             if eval_type in SKLEARN_CV_TYPES:
                 _run_sklearn_cv(run_dir, recipe, params)
             elif eval_type in LIGHTNING_CV_TYPES:
-                _run_lightning_cv(run_dir, recipe, params)
+                _run_lightning_cv(
+                    run_dir=run_dir,
+                    recipe=recipe,
+                    params=params,
+                    lightning_accelerator=lightning_accelerator,
+                    lightning_devices=lightning_devices,
+                )
             else:
                 raise ValueError(f"Unknown CV evaluator type: {eval_type}")
 
@@ -392,6 +442,23 @@ def main() -> int:
         default="auto",
         help="CV metric family to use. Default: auto (detect from recipe).",
     )
+    ap.add_argument(
+        "--lightning-accelerator",
+        choices=["cpu", "gpu", "auto"],
+        default="cpu",
+        help="Accelerator for Lightning-based CV models (e.g., ChemProp).",
+    )
+    ap.add_argument(
+        "--lightning-devices",
+        type=int,
+        default=1,
+        help="Number of devices for Lightning-based CV models.",
+    )
+    ap.add_argument(
+        "--require-classification-metrics",
+        action="store_true",
+        help="Only process run directories that already have classification_metrics.json.",
+    )
     args = ap.parse_args()
 
     generate_cv(
@@ -401,6 +468,9 @@ def main() -> int:
         overwrite=args.overwrite,
         exclude_models=set(args.exclude_model or []),
         task_type=args.task_type,
+        lightning_accelerator=args.lightning_accelerator,
+        lightning_devices=args.lightning_devices,
+        require_classification_metrics=args.require_classification_metrics,
     )
     return 0
 
